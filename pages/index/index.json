@@ -1,0 +1,8 @@
+{
+  "backgroundTextStyle":"white",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "v2ex",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#fff"
+}

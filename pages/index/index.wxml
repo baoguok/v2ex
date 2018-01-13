@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="node-list">
+    <view wx:for="{{nodeList}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="switchNode"
+          class="node {{ !!item.on ? 'on' : '' }}"
+    >
+      {{ item.name }}
+    </view>
+    <view class="node more">更多节点 ></view>
+  </view>
+  <scroll-view class="post-list">
+
+  </scroll-view>
+</view>

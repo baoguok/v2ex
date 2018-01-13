@@ -1,0 +1,30 @@
+/**index.wxss**/
+.node-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  padding: 30rpx;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.node-list .node {
+  padding: 10rpx;
+  margin: 0 10rpx;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10rpx;
+  font-size: 24rpx;
+}
+
+.node-list .node.on {
+  background-color: #b2b2b2;
+  border-color: #b2b2b2;
+  color: #ffffff;
+}
+
+.node-list .node.more {
+  border: none;
+}

@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/collection/collection",
+    "pages/my/my"
+  ],
+  "window":{
+    "backgroundTextStyle":"white",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "主页",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#b2b2b2"
+  },
+  "tabBar": {
+    "color": "#353535",
+    "selectedColor": "#09bb07",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home_selected.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "static/images/collection.png",
+        "selectedIconPath": "static/images/collection_selected.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我",
+        "iconPath": "static/images/my.png",
+        "selectedIconPath": "static/images/my_selected.png"
+      }
+    ],
+    "position": "bottom"
+
+  },
+  "debug": true
+}
