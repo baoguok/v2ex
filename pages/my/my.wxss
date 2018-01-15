@@ -1,8 +1,33 @@
-.log-list {
-    display: flex;
-    flex-direction: column;
-    padding: 40rpx;
+.person-center {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #eeeeee;
 }
-.log-item {
-    margin: 10rpx;
+
+.user-info {
+    width: 100%;
+    padding: 30rpx;
+    background-color: #ffffff;
+}
+
+.user-info .profile {
+    display: block;
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+    margin: 10rpx auto;
+}
+
+.profile image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.user-info .user-name {
+    width: 100%;
+    font-size: 28rpx;
+    text-align: center;
 }

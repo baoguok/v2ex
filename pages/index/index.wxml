@@ -9,7 +9,7 @@
     >
       {{ item.name }}
     </view>
-    <view class="node more">更多节点 ></view>
+    <view class="node more" bindtap="navigatToMoreNodes">更多节点 ></view>
   </view>
   <scroll-view class="post-list">
 

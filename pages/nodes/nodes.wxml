@@ -1,0 +1,32 @@
+<!--pages/nodes/nodes.wxml-->
+<view>
+  <view class="selected-node-list">
+    <view wx:for="{{selectedNodeList}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="switchNode"
+          class="node {{ !!item.on ? 'on' : '' }}"
+    >
+      {{ item.name }}
+    </view>
+  </view>
+  <view class="all-node-list">
+    <view wx:for="{{ allNodeList }}" wx:for-item="parentNode" class="nodes clearfix">
+      <view class="parent-node" 
+            data-id="{{ parentNode.id }}"
+            >
+            {{ parentNode.name }}
+      </view>
+      <view class="child-node-list">
+        <view class="child-node "
+              wx:for-item="childNode"
+              wx:for="{{ parentNode.childNodes }}"
+              wx:key="{{ childNode.id }}"
+              data-id="{{ childNode.id }}"
+        >
+          {{ childNode.name }}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

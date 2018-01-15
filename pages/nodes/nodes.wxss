@@ -1,0 +1,66 @@
+/* pages/nodes/nodes.wxss */
+.selected-node-list {
+  display: flex;
+  padding: 30rpx;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.selected-node-list .node {
+  padding: 10rpx;
+  margin: 0 10rpx;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10rpx;
+  font-size: 24rpx;
+}
+
+.selected-node-list .node.on {
+  background-color: #b2b2b2;
+  border-color: #b2b2b2;
+  color: #ffffff;
+}
+
+.selected-node-list .node.more {
+  border: none;
+}
+
+.all-node-list {
+  padding: 25rpx;
+}
+
+.all-node-list .nodes {
+  position: relative;
+  box-sizing:border-box;
+  width: 100%;
+  padding-left: 120rpx;
+  margin-bottom: 25rpx;
+}
+
+.nodes .parent-node {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  float: left;
+  width: 120rpx;
+  margin-left: -120rpx;
+  font-size: 20rpx;
+}
+
+.nodes .child-node-list {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.child-node-list .child-node {
+  float: left;
+  padding: 10rpx;
+  margin: 0 10rpx;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10rpx;
+  font-size: 24rpx;
+}

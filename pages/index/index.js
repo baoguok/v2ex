@@ -44,6 +44,7 @@ Page({
   },
   onLoad: function () {
   },
+  // 切换节点
   switchNode: function(e) {
     const id = e.target.dataset.id;
     this.data.nodeList.forEach(node => {
@@ -55,6 +56,12 @@ Page({
     });
     this.setData({nodeList: this.data.nodeList}, () => {
         console.log(this.data.nodeList);
+    });
+  },
+  // 跳转到更多节点
+  navigatToMoreNodes() {
+    wx.navigateTo({
+      url: '/pages/nodes/nodes',
     });
   },
   getUserInfo: function(e) {

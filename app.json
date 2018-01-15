@@ -1,14 +1,15 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/collection/collection",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/nodes/nodes"
   ],
-  "window":{
-    "backgroundTextStyle":"white",
+  "window": {
+    "backgroundTextStyle": "white",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "主页",
-    "navigationBarTextStyle":"black",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false,
     "backgroundColor": "#b2b2b2"
   },
@@ -38,7 +39,6 @@
       }
     ],
     "position": "bottom"
-
   },
   "debug": true
 }

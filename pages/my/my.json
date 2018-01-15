@@ -3,6 +3,6 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "我",
   "navigationBarTextStyle":"black",
-  "enablePullDownRefresh": true,
-  "backgroundColor": "#b2b2b2"
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#fff"
 }
