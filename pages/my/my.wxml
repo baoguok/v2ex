@@ -1,3 +1,17 @@
+<wxs module="my">
+    var settingList = [{
+        id: '123',
+        content: '我的名片'
+    },{
+        id: '124',
+        content: '我的发言'
+    }];
+    console.log(settingList);
+    module.exports = {
+        settingList: settingList
+    }
+</wxs>
+
 <view class="person-center">
     <view class="user-info" >
         <view class="profile">
@@ -6,5 +20,9 @@
         <view class="user-name">
             <text>{{ userInfo.nickName }}</text>
         </view>
+    </view>
+
+    <view class="setting-container">
+        <setting-list dataList="{{ my.settingList }}"></setting-list>
     </view>
 </view>

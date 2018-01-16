@@ -4,5 +4,8 @@
   "navigationBarTitleText": "我",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh": false,
-  "backgroundColor": "#fff"
+  "backgroundColor": "#fff",
+  "usingComponents": {
+    "setting-list": "/components/list/list"
+  }
 }
