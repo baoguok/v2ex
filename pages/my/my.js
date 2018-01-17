@@ -7,6 +7,5 @@ Page({
     this.setData({
       userInfo: appInstance.globalData.userInfo
     });
-    console.log(this.userInfo);
   }
 });

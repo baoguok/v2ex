@@ -32,3 +32,7 @@
     font-size: 28rpx;
     text-align: center;
 }
+
+.setting-container {
+  margin-top: 20rpx;
+}

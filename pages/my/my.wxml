@@ -1,12 +1,14 @@
 <wxs module="my">
     var settingList = [{
         id: '123',
+        icon: '/static/images/my.png',
         content: '我的名片'
     },{
         id: '124',
+        icon: '/static/images/home.png',
         content: '我的发言'
     }];
-    console.log(settingList);
+    console.log(JSON.stringify(settingList[0]));
     module.exports = {
         settingList: settingList
     }
@@ -23,6 +25,6 @@
     </view>
 
     <view class="setting-container">
-        <setting-list dataList="{{ my.settingList }}"></setting-list>
+        <setting-list list="{{ my.settingList }}"></setting-list>
     </view>
 </view>
