@@ -1,0 +1,42 @@
+/* components/list/list.wxss */
+
+.list {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.list .item {
+  position: relative;
+  display: block;
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  font-size: 26rpx;
+  line-height: 80rpx;
+}
+
+.list .item .left-icon {
+  display: block;
+  float: left;
+  margin-top: 26rpx;
+  margin-right: 30rpx;
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.list .item text {
+  float: left
+}
+
+.list .item .arrow-right {
+  position: absolute;
+  display: block;
+  right: 30rpx;
+  width: 14rpx;
+  height: 14rpx;
+  margin-top: 33rpx;
+  border-top: 1px solid #b2b2b2;
+  border-right: 1px solid #b2b2b2;
+  transform: rotate(45deg);
+}

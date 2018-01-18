@@ -1,0 +1,12 @@
+<!--components/list/list.wxml-->
+<view class="list">
+  <view 
+    wx:for="{{ list }}" 
+    class="item" 
+    wx:key="id"
+  >
+    <image class="left-icon" src="{{ item.nv_icon }}" />
+    <text class='content clearfix'>{{ item.nv_content }}</text>
+    <view class="arrow-right clearfix"></view>
+  </view>
+</view>

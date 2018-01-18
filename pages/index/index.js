@@ -40,7 +40,10 @@ Page({
         id: 9,
         name: '问与答',
         on: 0
-    }]
+    }],
+    postList: [
+
+    ]
   },
   onLoad: function () {
   },
