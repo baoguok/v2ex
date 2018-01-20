@@ -4,5 +4,8 @@
   "navigationBarTitleText": "v2ex",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh": false,
-  "backgroundColor": "#fff"
+  "backgroundColor": "#fff",
+  "usingComponents": {
+    "post-item": "/components/post/post"
+  }
 }

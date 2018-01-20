@@ -1,2 +1,22 @@
 <!--components/post/post.wxml-->
-<text>components/post/post.wxml</text>
+<view class='post'>
+  <view class="left clearfix">
+      <image src="{{ postInfo.avatar }}"></image>
+  </view>
+  <view class="center">
+    <view>
+      <view>{{ postInfo.node }}</view>
+      <view>{{ postInfo.author }}</view>
+    </view>
+    <text>
+      {{ postInfo.title }}
+    </text>
+    <view>
+      <view>{{  postInfo.replyInfo.lastReplyTime  }}</view>
+      <view>{{  postInfo.replyInfo.lastReplyPerson }}</view>
+    </view>
+  </view>
+  <view class="right clearfix">
+      <view class="reply-num">{{ postInfo.replyInfo.replyNum }}</view>
+  </view>  
+</view>

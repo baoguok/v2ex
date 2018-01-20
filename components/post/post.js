@@ -4,7 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    postInfo: {
+      type: Object,
+      value: {}
+    }
   },
 
   /**
@@ -19,5 +22,9 @@ Component({
    */
   methods: {
 
+  },
+
+  ready() {
+    console.log('postInfo',this.properties.postInfo);
   }
 })

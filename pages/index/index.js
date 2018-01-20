@@ -42,7 +42,18 @@ Page({
         on: 0
     }],
     postList: [
-
+      {
+        id: 1255,
+        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
+        node: '最热',
+        author: '小王',
+        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
+        replyInfo: {
+          replyNum: 52,
+          lastReplyTime: '23分钟前',
+          lastReplyPersonName: '李白很帅'
+        }
+      }
     ]
   },
   onLoad: function () {

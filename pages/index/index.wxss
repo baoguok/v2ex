@@ -1,8 +1,5 @@
 /**index.wxss**/
 .node-list {
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
   padding: 30rpx;
   flex-flow: row wrap;
@@ -38,29 +35,3 @@
 .post-list .post {
   width: 100%;
 }
-
-.post .left {
-  float: left;
-  width: 20rpx;
-
-}
-
-.left image {
-  width: 100%;
-  height: 100%;
-}
-
-.post .center {
-  width: 100%;
-  padding: 0 20rpx;
-}
-
-.post .right {
-  float: right;
-  width: 20rpx;
-}
-
-.right .reply-num {
-  
-}
-

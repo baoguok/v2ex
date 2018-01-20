@@ -9,19 +9,20 @@
     >
       {{ item.name }}
     </view>
-    <view class="node more" bindtap="navigatToMoreNodes">更多节点 ></view>
+    <view 
+      class="node more" 
+      bindtap="navigatToMoreNodes"
+    >
+      更多节点 
+    </view>
   </view>
   <scroll-view class="post-list">
-    <view wx:for="postList" class="post">
-      <view class="left clearfix">
-        <image src=""></image
-      ></view>
-      <view class="center">
-
-      </view>
-      <view class="right clearfix">
-        <view class="reply-num"></view>
-      </view>
-    </view>
+    <block 
+      wx:for="{{ postList }}" 
+      wx:for-key="post"
+      wx:key="id"
+    >
+      <post-item post-info="{{ post }}" ></post-item>
+    </block>
   </scroll-view>
 </view>
