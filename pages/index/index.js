@@ -57,6 +57,7 @@ Page({
     ]
   },
   onLoad: function () {
+    console.log(this.data.postList)
   },
   // 切换节点
   switchNode: function(e) {

@@ -19,10 +19,31 @@
   <scroll-view class="post-list">
     <block 
       wx:for="{{ postList }}" 
-      wx:for-key="post"
+      wx:for-item="postInfo"
       wx:key="id"
     >
-      <post-item post-info="{{ post }}" ></post-item>
+      <post-item post-info="{{ postInfo }}" ></post-item>
+      <view class='post'>
+        <view class="left clearfix">
+            <image src="{{ postInfo.avatar }}"></image>
+        </view>
+        <view class="center">
+          <view>
+            <view>{{ postInfo.node }}</view>
+            <view>{{ postInfo.author }}</view>
+          </view>
+          <text>
+            {{ postInfo.title }}
+          </text>
+          <view>
+            <view>{{  postInfo.replyInfo.lastReplyTime  }}</view>
+            <view>{{  postInfo.replyInfo.lastReplyPerson }}</view>
+          </view>
+        </view>
+        <view class="right clearfix">
+            <view class="reply-num">{{ postInfo.replyInfo.replyNum }}</view>
+        </view>  
+      </view>
     </block>
   </scroll-view>
 </view>
