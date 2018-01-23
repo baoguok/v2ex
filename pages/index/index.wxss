@@ -1,4 +1,18 @@
 /**index.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column ;
+}
+
+.node-list {
+    display: flex;
+    padding: 30rpx;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
 .node-list {
   display: flex;
   padding: 30rpx;
@@ -28,10 +42,94 @@
 
 .post-list {
   width: 100%;
-  padding: 0 30rpx;
   box-sizing: border-box;
 }
 
 .post-list .post {
+  display: flex;
   width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  flex-flow: row nowrap;
+  border-bottom: 1px solid #f6f6f6;
 }
+
+.post .left {
+}
+
+.left image {
+  display: block;
+  width: 35rpx;
+  height: 35rpx;
+  border-radius: 5rpx;
+  margin: 10rpx;
+  margin-top: 0;
+}
+
+.post .center {
+  padding: 0rpx 10rpx;
+}
+
+.center .first-line {
+  color: grey;
+  font-size: 20rpx;
+}
+
+.first-line .node {
+  float: left;
+  padding: 3rpx 6rpx;
+  background-color: #f6f6f6;
+}
+
+.first-line .athor {
+  float: left;
+  padding: 3rpx 6rpx;
+  margin-left: 10rpx;
+}
+
+.main-line-title {
+  padding-top: 15rpx;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: #353535;
+}
+
+.center .last-line-reply {
+  color: grey;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+}
+
+.last-line-reply .reply-time {
+  float: left;
+  padding: 3rpx 0rpx;
+}
+
+.last-line-reply .reply-person {
+  float: left;
+  padding: 3rpx 0rpx;
+  margin-left: 20rpx;
+  
+}
+
+.reply-person .name {
+  float: right;
+  color: #353535;
+}
+
+.post .right {
+  display: flex;
+  align-items: center;
+}
+
+.post .right .reply-num {
+  display: block;
+  height: 30rpx;
+  font-size: 26rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 14rpx;
+  background-color: #09bb07;
+  color: #ffffff;
+
+}
+

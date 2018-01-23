@@ -22,22 +22,23 @@
       wx:for-item="postInfo"
       wx:key="id"
     >
-      <post-item post-info="{{ postInfo }}" ></post-item>
       <view class='post'>
         <view class="left clearfix">
             <image src="{{ postInfo.avatar }}"></image>
         </view>
         <view class="center">
-          <view>
-            <view>{{ postInfo.node }}</view>
-            <view>{{ postInfo.author }}</view>
+          <view class="first-line clearfix">
+            <view class="node">{{ postInfo.node }}</view>
+            <view class='athor'>{{ postInfo.author }}</view>
           </view>
-          <text>
+          <view class="main-line-title">
             {{ postInfo.title }}
-          </text>
-          <view>
-            <view>{{  postInfo.replyInfo.lastReplyTime  }}</view>
-            <view>{{  postInfo.replyInfo.lastReplyPerson }}</view>
+          </view>
+          <view class="last-line-reply">
+            <view class="reply-time">{{  postInfo.replyInfo.lastReplyTime  }}</view>
+            <view class="reply-person"> 
+              最后回复<view class="name"> {{ ' ' + postInfo.replyInfo.lastReplyPersonName }}</view>
+            </view>
           </view>
         </view>
         <view class="right clearfix">
