@@ -1,0 +1,95 @@
+/* pages/post/post.wxss */
+
+.reply-list {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reply-list .reply {
+  display: flex;
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  flex-flow: row nowrap;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.reply .left {
+}
+
+.left image {
+  display: block;
+  width: 35rpx;
+  height: 35rpx;
+  border-radius: 5rpx;
+  margin: 10rpx;
+  margin-top: 0;
+}
+
+.reply .center {
+  padding: 0rpx 10rpx;
+}
+
+.center .first-line {
+  color: grey;
+  font-size: 20rpx;
+}
+
+.first-line .node {
+  float: left;
+  padding: 3rpx 6rpx;
+  background-color: #f6f6f6;
+}
+
+.first-line .athor {
+  float: left;
+  padding: 3rpx 6rpx;
+  margin-left: 10rpx;
+}
+
+.main-line-title {
+  padding-top: 15rpx;
+  word-break: break-all;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: #353535;
+}
+
+.center .last-line-reply {
+  color: grey;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+}
+
+.last-line-reply .reply-time {
+  float: left;
+  padding: 3rpx 0rpx;
+}
+
+.last-line-reply .reply-person {
+  float: left;
+  padding: 3rpx 0rpx;
+  margin-left: 20rpx;
+  
+}
+
+.reply-person .name {
+  float: right;
+  color: #353535;
+}
+
+.reply .right {
+  display: flex;
+  align-items: center;
+}
+
+.reply .right .reply-num {
+  display: block;
+  height: 30rpx;
+  font-size: 26rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 14rpx;
+  background-color: #09bb07;
+  color: #ffffff;
+
+}

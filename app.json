@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/collection/collection",
     "pages/my/my",
-    "pages/nodes/nodes"
+    "pages/nodes/nodes",
+    "pages/post/post"
   ],
   "window": {
     "backgroundTextStyle": "white",

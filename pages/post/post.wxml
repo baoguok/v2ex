@@ -1,0 +1,37 @@
+<view class="post-detail">
+  <view class="post-content">
+      <view class="author-info">
+        <view class="author-avatar"><image src="{{ author.avatar }}"></image></view>
+        <view class="author-name">{{ author.nickname }}</view>
+      </view>
+      <text class="post-title">{{ post.title  }}</text>
+      <text class="post-info">
+        <text class="post-time">{{ post.lastReply }}</text>
+        <text class="post-click-times">{{ post.clickTimes }}</text>
+      </text>
+      <view class="content">{{ post.content }}</view>
+  </view>
+  <view class="reply-list">
+    <block
+      wx:for="{{replies}}"
+      wx:for-item="replyItem"
+    >
+      <view class='reply'>
+        <view class="left clearfix">
+            <image src="{{ replyItem.avatar }}"></image>
+        </view>
+        <view class="center" bindtap="toPostDetail">
+          <view class="first-line clearfix">
+            <view class='athor'>{{ replyItem.name }}</view>
+          </view>
+          <view class="main-line-title">
+            {{ replyItem.content }}
+          </view>
+          <view class="last-line-reply">
+            <view class="reply-time">{{  replyItem.replyTime  }}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

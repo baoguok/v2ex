@@ -127,6 +127,12 @@ Page({
       url: '/pages/nodes/nodes',
     });
   },
+
+  toPostDetail() {
+    wx.navigateTo({
+      url: '/pages/post/post',
+    });
+  },
   getUserInfo: function(e) {
 
   }

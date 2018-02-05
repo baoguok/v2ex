@@ -26,7 +26,7 @@
         <view class="left clearfix">
             <image src="{{ postInfo.avatar }}"></image>
         </view>
-        <view class="center">
+        <view class="center" bindtap="toPostDetail">
           <view class="first-line clearfix">
             <view class="node">{{ postInfo.node }}</view>
             <view class='athor'>{{ postInfo.author }}</view>
