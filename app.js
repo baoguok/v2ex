@@ -1,61 +1,99 @@
 //app.js
+var { html2json } = require('./utils/html2json.js');
+var { password, account } = require('./config/accountInfo.js');
 App({
   onLaunch: function () {
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-            if (res.code) {
-                //发起网络请求
-                console.log(res.code);
-            } else {
-                console.log('获取用户登录态失败！' + res.errMsg)
-            }
-      }
-    });
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        console.log(res);
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo;
-              console.log(this.globalData.userInfo);
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res);
-              }
+    const that = this;
+    wx.redirectTo({
+      url: 'pages/login/login',
+    })
+    // 获取登录cookie
+    wx.request({
+      url: 'https://www.v2ex.com/signin',
+      method: 'GET',
+      success: (res) => {
+        const header = res.header;
+        const html = res.data;
+        const htmlJson = html2json(html);
+        console.log(htmlJson);
+        let cookies = this.getCookieFromHeader(header['set-cookie']);
+        Object.keys(cookies).forEach(key => {
+          // 存储 cookie 到 storage
+          wx.setStorage({
+            key: 'cookies',
+            data: cookies,
+            success: () => {
+              console.log('存储 key:'+ key + ' value: ' + cookies[key] + ' storage' + '成功');
             }
           });
-        } else {
-            wx.authorize({
-                scope: 'scope.userInfo',
-                success() {
-                    wx.getUserInfo({
-                        success: res => {
-                          // 可以将 res 发送给后台解码出 unionId
-                          this.globalData.userInfo = res.userInfo;
-                          console.log(this.globalData.userInfo);
+        });
 
-                          // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                          // 所以此处加入 callback 以防止这种情况
-                          if (this.userInfoReadyCallback) {
-                              this.userInfoReadyCallback(res);
-                          }
-                        }
-                    });
-                }
-            });
-        }
+        that.findInput(htmlJson);
       }
     });
   },
+  getCookieFromHeader: (header) => {
+    let cookie = {};
+    const temp = header.split(';')[0];
+    const itemArr = temp.split('=');
+    const key = itemArr[0];
+    const val = itemArr[1];
+    cookie[key] = val.slice(1, -1);
+    return cookie;
+  },
+  /**
+   * 获取表单 name 等信息
+   * https://www.v2ex.com/_captcha?once=95378
+   */
+  findInput(tree) {
+    if (tree.node === 'element' || tree.node === 'root') {
+      if (tree.tag === 'input') {
+        const treeType = tree.attr['type'];
+        const treePlaceholder = tree.attr['placeholder'];
+        const treeName = tree.attr['name'];
+        const treeValue = tree.attr['value'];
+        if (treeType === 'hidden') {
+          // 隐藏表单
+          this.formData.push({
+            type: treeName,
+            name: treeName,
+            value: treeValue
+          });
+        } else if (treeType === 'password') {
+          // 密码
+          this.formData.push({
+            type: 'password',
+            name: treeName,
+            value: treeValue
+          });
+        } else if (treeType === 'text') {
+          // 验证码 or 账号
+          if (treePlaceholder === '请输入上图中的验证码') {
+            this.formData.push({
+              type: 'capcha',
+              name: treeName,
+              value: treeValue
+            });
+          } else {
+            if (treeName === 'q') return;
+            this.formData.push({
+              type: 'account',
+              name: treeName,
+              value: treeValue
+            });
+          }
+        }
+      } else {
+        if (tree.child && tree.child.length>0) {
+           tree.child.forEach(node => {
+              this.findInput(node);
+           });
+         }
+      }
+    }
+  },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null 
+  },
+  formData: []
 })
