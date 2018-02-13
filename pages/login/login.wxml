@@ -1,6 +1,5 @@
 <!--pages/login/login.wxml-->
-<view>
-  <view class="weui-cells__title">登录</view>
+<view class='login-container'>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
@@ -30,5 +29,4 @@
       </view>
     </view>
   </view>
-  <view class="weui-cells__tips">底部说明文字底部说明文字</view>
 </view>

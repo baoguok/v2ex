@@ -16,7 +16,8 @@ App({
         const html = res.data;
         const htmlJson = html2json(html);
         console.log(htmlJson);
-        let cookies = this.getCookieFromHeader(header['set-cookie']);
+        console.log(res);
+        let cookies = this.getCookieFromHeader(header['set-cookie'] || header['Set-Cookie']);
         Object.keys(cookies).forEach(key => {
           // 存储 cookie 到 storage
           wx.setStorage({
@@ -29,15 +30,16 @@ App({
         });
 
         that.findInput(htmlJson);
+        console.log(that.formData)
       }
     });
   },
   getCookieFromHeader: (header) => {
     let cookie = {};
     const temp = header.split(';')[0];
-    const itemArr = temp.split('=');
-    const key = itemArr[0];
-    const val = itemArr[1];
+    const equalCharIndex = temp.indexOf('=');
+    const key = temp.slice(0, equalCharIndex);
+    const val = temp.slice(equalCharIndex+1);
     cookie[key] = val.slice(1, -1);
     return cookie;
   },

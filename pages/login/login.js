@@ -22,25 +22,45 @@ Page({
         once = data.value;
       }
     });
-    wx.request({
-      url: `https://www.v2ex.com/_captcha`,
-      method: 'GET',
-      responseType: 'arrayBuffer',
-      data: {
-        once
-      },
+    wx.downloadFile({
+      url: `https://www.v2ex.com/_captcha?once=${once}`,
       header: {
         'cookie': getCookieString()
       },
       success: (res) => {
-        console.log(res.data);
-        that.setData({
-          capcha: `data:image/png;base64,${res.data}`
-        }, () => {
-          console.log(that.data.capcha);
-        });
+        if (res.statusCode === 200) {
+          that.setData({
+            capcha: res.tempFilePath
+          }, () => {
+            console.log(that.data.capcha);
+          });
+        }
+      },
+      fail: () => {
+        console.log('下载验证码失败');
       }
     })
+    // wx.request({
+    //   url: `https://www.v2ex.com/_captcha`,
+    //   method: 'GET',
+    //   responseType: 'arraybuffer',
+    //   data: {
+    //     once
+    //   },
+    //   header: {
+    //     'cookie': getCookieString(),
+    //     'content-type': 'image/png'
+    //   },
+    //   success: (res) => {
+    //     const blob = new Blob([res.data], {type: "image/png"});
+    //     const url = URL.createObjectURL(blob);
+    //     that.setData({
+    //       capcha: url
+    //     }, () => {
+    //       console.log(that.data.capcha);
+    //     });
+    //   }
+    // })
     
   },
 
