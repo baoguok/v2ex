@@ -1,7 +1,6 @@
 // pages/login/login.js
 let cookieUtil = require('../../utils/cookie.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -130,7 +129,7 @@ Page({
       mask: true
     });
     wx.request({
-      url: 'https://www.v2ex.com/signin',
+      url: 'http://v2ex.fedeveloper.cn/login',
       method: 'POST',
       header: {
         'cookie': getCookieString(),
