@@ -5,7 +5,7 @@ var getCookieString = () => {
   const cookieObj = wx.getStorageSync(cookieKey);
   if (!cookieObj) return;
   Object.keys(cookieObj).forEach(key => {
-    cookieStr += `${key}=${cookieObj[key]};`;
+    cookieStr += `${key}="${cookieObj[key]}";`;
   });
   return cookieStr;
 }
