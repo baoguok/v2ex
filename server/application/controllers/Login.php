@@ -42,9 +42,8 @@ class Login extends CI_Controller {
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('code' => '10001', 'msg' => '登录失败')))
                 ->_display();
-            exit;
         }
-//        var_dump($pb3_session);
+        exit;
 
     }
 
