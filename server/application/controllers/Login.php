@@ -20,8 +20,6 @@ class Login extends CI_Controller {
         );
         $result = $this->curl_https($url, $form_data, $headers, "PB3_SESSION=".$pb3_session, 30, false);
         preg_match('/A2\=\"(.*)\"\;/', $result, $matches);
-        var_dump($result, $matches);
-
         if (!empty($matches[1])) {
             $A2 = $matches[1];
             $this->input->set_cookie(array(
@@ -34,13 +32,14 @@ class Login extends CI_Controller {
             ));
             $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('code' => '200', 'msg' => '登录成功')))
+                ->set_output(json_encode(array('code' => 200, 'msg' => '登录成功')))
                 ->_display();
+            exit;
 
         } else {
             $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('code' => '10001', 'msg' => '登录失败')))
+                ->set_output(json_encode(array('code' => 10001, 'msg' => '登录失败', 'result' => $result)))
                 ->_display();
             exit;
         }
@@ -57,7 +56,7 @@ class Login extends CI_Controller {
      * @param bool   $debug      是否打印错误信息，默认false
      */
     private function curl_https($url, $data=array(), $header=array(), $cookie, $timeout=60, $debug=false){
-        //$proxy = $this->get_proxy();
+        $proxy = $this->get_proxy();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);  // 从证书中检查SSL加密算法是否存在
@@ -66,7 +65,7 @@ class Login extends CI_Controller {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch,CURLOPT_COOKIE,$cookie);
-        //curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        curl_setopt($ch, CURLOPT_PROXY, $proxy);
         curl_setopt($ch, CURLOPT_REFERER, $header['Referer']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
@@ -101,10 +100,10 @@ class Login extends CI_Controller {
     }
 
     private function get_proxy() {
-        //$proxy = json_decode(file_get_contents('https://api.getproxylist.com/proxy?allowsHttps=1&protocol[]=http&country=CN'));
+        //$proxy = json_decode(file_get_contents('https://api.getproxylist.com/proxy?allowsHttps=1&protocol[]=http'));
         //return $proxy->ip.":".$proxy->port;
-        return "139.198.12.227:3128";
-    }
+        return "59.67.152.230:3128";
+     }
 
 
     public function create() {
