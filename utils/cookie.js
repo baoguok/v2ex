@@ -10,7 +10,14 @@ var getCookieString = () => {
   return cookieStr;
 }
 
+var setCookie = (key, val) => {
+  let cookieObj = wx.getStorageSync(cookieKey);
+  cookieObj[key] = val;
+  wx.setStorageSync(cookieKey, cookieObj);
+}
+
 
 module.exports = {
-  getCookieString
+  getCookieString,
+  setCookie
 }
