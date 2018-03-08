@@ -16,35 +16,38 @@
       更多节点 
     </view>
   </view>
-  <scroll-view class="post-list">
-    <block 
-      wx:for="{{ postList }}" 
-      wx:for-item="postInfo"
-      wx:key="id"
-    >
-      <view class='post'>
-        <view class="left clearfix">
-            <image src="{{ postInfo.avatar }}"></image>
-        </view>
-        <view class="center" bindtap="toPostDetail">
-          <view class="first-line clearfix">
-            <view class="node">{{ postInfo.node }}</view>
-            <view class='athor'>{{ postInfo.author }}</view>
+  <view class='post-list-container'>
+    <scroll-view class="post-list">
+      <block 
+        wx:for="{{ postList }}" 
+        wx:for-item="postInfo"
+        wx:key="id"
+      >
+        <view class='post'>
+          <view class="left clearfix">
+              <image src="{{ postInfo.avatar }}"></image>
           </view>
-          <view class="main-line-title">
-            {{ postInfo.title }}
-          </view>
-          <view class="last-line-reply">
-            <view class="reply-time">{{  postInfo.replyInfo.lastReplyTime  }}</view>
-            <view class="reply-person"> 
-              最后回复<view class="name"> {{ ' ' + postInfo.replyInfo.lastReplyPersonName }}</view>
+          <view class="center" bindtap="toPostDetail">
+            <view class="first-line clearfix">
+              <view class="node">{{ postInfo.node }}</view>
+              <view class='athor'>{{ postInfo.author }}</view>
+            </view>
+            <view class="main-line-title">
+              {{ postInfo.title }}
+            </view>
+            <view class="last-line-reply">
+              <view class="reply-time">{{  postInfo.replyInfo.lastReplyTime  }}</view>
+              <view class="reply-person"> 
+                最后回复<view class="name"> {{ ' ' + postInfo.replyInfo.lastReplyPersonName }}</view>
+              </view>
             </view>
           </view>
+          <view class="right clearfix">
+              <view class="reply-num">{{ postInfo.replyInfo.replyNum }}</view>
+          </view>  
         </view>
-        <view class="right clearfix">
-            <view class="reply-num">{{ postInfo.replyInfo.replyNum }}</view>
-        </view>  
-      </view>
-    </block>
-  </scroll-view>
+      </block>
+    </scroll-view>
+  </view>
+  
 </view>

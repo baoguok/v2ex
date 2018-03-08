@@ -1,39 +1,46 @@
 //app.js
 var { html2json } = require('./utils/html2json.js');
 var { password, account } = require('./config/accountInfo.js');
+var { isLogined } = require('./utils/loginUtil.js');
+
 App({
   onLaunch: function () {
     const that = this;
-    wx.redirectTo({
-      url: 'pages/login/login',
-    })
-    // 获取登录cookie
-    wx.request({
-      url: 'https://www.v2ex.com/signin',
-      method: 'GET',
-      success: (res) => {
-        const header = res.header;
-        const html = res.data;
-        const htmlJson = html2json(html);
-        console.log(htmlJson);
-        console.log(res);
-        let cookies = this.getCookieFromHeader(header['set-cookie'] || header['Set-Cookie']);
-        Object.keys(cookies).forEach(key => {
-          // 存储 cookie 到 storage
-          wx.setStorage({
-            key: 'cookies',
-            data: cookies,
-            success: () => {
-              console.log('存储 key:'+ key + ' value: ' + cookies[key] + ' storage' + '成功');
-            }
-          });
-        });
+    if (isLogined)  {
 
-        that.findInput(htmlJson);
-        console.log(that.formData)
-      }
-    });
+    } else {
+      // 获取登录cookie
+      wx.request({
+        url: 'https://www.v2ex.com/signin',
+        method: 'GET',
+        success: (res) => {
+          const header = res.header;
+          const html = res.data;
+          const htmlJson = html2json(html);
+          let cookies = this.getCookieFromHeader(header['set-cookie'] || header['Set-Cookie']);
+          Object.keys(cookies).forEach(key => {
+            // 存储 cookie 到 storage
+            wx.setStorage({
+              key: 'cookies',
+              data: cookies,
+              success: () => {
+                console.log('存储 key:' + key + ' value: ' + cookies[key] + ' storage' + '成功');
+              }
+            });
+          });
+          that.findInput(htmlJson);
+          console.log(that.formData)
+        }
+      });
+
+      // 跳转到登录页
+      wx.redirectTo({
+        url: 'pages/login/login',
+      });
+    }
   },
+
+  // 从请求 response 头部中获取set-cookie
   getCookieFromHeader: (header) => {
     let cookie = {};
     const temp = header.split(';')[0];
@@ -43,6 +50,7 @@ App({
     cookie[key] = val.slice(1, -1);
     return cookie;
   },
+
   /**
    * 获取表单 name 等信息
    * https://www.v2ex.com/_captcha?once=95378
@@ -94,8 +102,10 @@ App({
       }
     }
   },
+
   globalData: {
     userInfo: null 
   },
+
   formData: []
 })

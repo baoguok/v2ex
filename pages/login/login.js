@@ -19,7 +19,6 @@ Page({
    */
   onLoad: function (options) {
     const app = getApp();
-    
     const that = this;
     let once = '';
     app.formData.forEach(data => {
@@ -33,6 +32,9 @@ Page({
     this.refreshCapcha();
   },
 
+  /**
+   * 刷新验证码图片
+   */
   refreshCapcha() {
     const { getCookieString } = cookieUtil;
     const that = this;
@@ -57,21 +59,27 @@ Page({
     })
   },
 
+ // 账号输入监听
  onAccountInput(e) {
     this.setData({
       formData: Object.assign({}, this.data.formData, {account: e.detail.value})
     });
   },
+
+  // 密码输入监听
   onPasswordInput(e) {
     this.setData({
       formData: Object.assign({}, this.data.formData, { password: e.detail.value })
     });
   },
+
+  // 验证码输入监听
   onCapchaInput(e) {
     this.setData({
       formData: Object.assign({}, this.data.formData, { capcha: e.detail.value })
     });
   },
+
   /**
    * 登录
    */
@@ -100,6 +108,7 @@ Page({
       },
       data: params,
       success: (res) => {
+        wx.hideLoading();
         if(res.statusCode === 200) {
           wx.hideLoading();
           if (res.data.code === 200) {
@@ -109,7 +118,12 @@ Page({
             });
             let header = JSON.parse(JSON.stringify(res.header));
             let a2 = /A2\=(.*)\;\s+expires/g.exec(header['Set-Cookie']);
+            // 登录成功 设置 cookie
             cookieUtil.setCookie('A2', decodeURIComponent(a2[1]));
+            // 跳转到首页
+            wx.navigateTo({
+              url: 'pages/index/index'
+            });
           } else {
             wx.showToast({
               title: '登录失败',
@@ -117,7 +131,10 @@ Page({
             });
           }
         } else {
-          
+          wx.showToast({
+            title: '登录失败',
+            icon: 'none'
+          });
         }
       },
       complete: () => {
