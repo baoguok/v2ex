@@ -11,7 +11,7 @@ let selectorParser = (selector) => {
   selectors = selectors.map((selector, index) => {
     let sls = selector.replace(reg, ',$1').split(',');
     return sls.map(sl => {
-      let type = 'tag';
+      let type = '';
       let name = '';
       switch (sl[0]) {
         case '#':
@@ -68,7 +68,7 @@ let getDomByLinkSelector = (selectors, tree) => {
   if (selectors.length < 1) return tree;
   let temDoms = getDomBySingleSelector(selectors[0], tree);
   tempDoms = tempDoms.filter(dom => {
-    return selectors.filter(sls => {
+    return selectors.any(sls => {
       if (sls.type === 'id') {
         return sls.name === dom.attr.id;
       } else if (sls.type === 'class') {
@@ -82,14 +82,20 @@ let getDomByLinkSelector = (selectors, tree) => {
 }
 
 /**
- * 
+ * 连续选择器队列
  */
 let getDomByQueueSelector = (selectorQueue, tree) => {
   if (selectorQueue.length === 1) {
     return getDomByLinkSelector(selectorQueue[0], tree);
+  } else {
+  	const nextDoms = getDomByLinkSelector(selectorQueue[0], tree);
+	nextDoms.forEach(dom => {
+        getDomByQueueSelector.doms.push(getDomByQueueSelector(selectorQueue.slice(1), dom));
+	});
   }
-  
 }
+
+getDomByQueueSelector.doms = [];
 
 /**
  * domQuery函数
