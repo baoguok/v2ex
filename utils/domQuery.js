@@ -1,7 +1,7 @@
 import JsonTree from './jsonTree';
 
 /**
- * 选择转换器
+ * 选择转换器 #: id  .： class  @: attr
  * selector String
  * return Array 
  */
@@ -22,6 +22,10 @@ let selectorParser = (selector) => {
           type = 'class';
           name = sl.slice(1);
           break;
+        case '@':
+          type = 'attr';
+          name = sl.slice(1);
+          break;  
         default:
           type = 'tag';
           name = sl.slice(0);
@@ -45,11 +49,17 @@ let selectorParser = (selector) => {
 let getDomBySingleSelector = (selector, tree) => {
   let doms = [];
   switch(selector.type) {
-    case 'id': 
+    case 'id':
       doms = tree.getNodesById(selector.name);
       break;
     case 'class':
       doms = tree.getNodesByClassName(selector.name);
+      break;
+    case 'attr':
+      const obj = selector.name.split(':');
+      const key = obj[0];
+      const val = obj[1];
+      doms = tree.getNodesByAtrr(key, val);
       break;
     default:
       doms = tree.getNodesByTagName(selector.name);
@@ -73,6 +83,11 @@ let getDomByLinkSelector = (selectors, tree) => {
         return sls.name === dom.attr.id;
       } else if (sls.type === 'class') {
         return dom.attr.class.indexOf(sls.name);
+      } else if (sls.type === 'atrr') {
+        const obj = sls.name.split(':');
+        const key = obj[0];
+        const val = obj[1];
+        return dom.atrr[key] === val;
       } else {
         return dom.tag === sls.name
       }
@@ -86,16 +101,19 @@ let getDomByLinkSelector = (selectors, tree) => {
  */
 let getDomByQueueSelector = (selectorQueue, tree) => {
   if (selectorQueue.length === 1) {
-    return getDomByLinkSelector(selectorQueue[0], tree);
+    if (!getDomByQueueSelector.doms) {
+      getDomByQueueSelector.doms = [];
+    }
+    getDomByQueueSelector.doms = getDomByQueueSelector.doms.concat(getDomByLinkSelector(selectorQueue[0], tree));
   } else {
   	const nextDoms = getDomByLinkSelector(selectorQueue[0], tree);
-	nextDoms.forEach(dom => {
-        getDomByQueueSelector.doms.push(getDomByQueueSelector(selectorQueue.slice(1), dom));
-	});
+    
+    nextDoms.forEach(dom => {
+         getDomByQueueSelector(selectorQueue.slice(1), dom);
+    });
+    return getDomByQueueSelector.doms;
   }
 }
-
-getDomByQueueSelector.doms = [];
 
 /**
  * domQuery函数
@@ -103,13 +121,13 @@ getDomByQueueSelector.doms = [];
 let getNodesBySelectorFn = (tree) => {
   return (selector) => {
     const selectors = selectorParser(selector);
-    selectors.forEach(selector => {
-
-    });
-    return 
+    return getDomByQueueSelector(selectors. tree);
   }
 }
 
+/**
+ * 入口函数
+ */
 let domQuery = (htmlStr) => {
     let tree = new JsonTree(htmlStr, false);
     return getNodesBySelectorFn(tree);

@@ -6,8 +6,8 @@ var { isLogined } = require('./utils/loginUtil.js');
 App({
   onLaunch: function () {
     const that = this;
-    if (isLogined)  {
-
+    if (isLogined())  {
+      
     } else {
       // 获取登录cookie
       wx.request({

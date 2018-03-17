@@ -5,5 +5,5 @@ function isLogined () {
 }
 
 module.exports = {
-  isLogined,
+  isLogined
 }

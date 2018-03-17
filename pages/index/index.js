@@ -107,6 +107,11 @@ Page({
   onLoad: function () {
     console.log(this.data.postList)
   },
+
+  onShow: function () {
+    
+  },
+
   // 切换节点
   switchNode: function(e) {
     const id = e.target.dataset.id;
@@ -133,6 +138,8 @@ Page({
       url: '/pages/post/post',
     });
   },
+
+
   getUserInfo: function(e) {
 
   }
