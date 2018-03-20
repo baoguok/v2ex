@@ -76,13 +76,14 @@ let getDomBySingleSelector = (selector, tree) => {
  */
 let getDomByLinkSelector = (selectors, tree) => {
   if (selectors.length < 1) return tree;
-  let temDoms = getDomBySingleSelector(selectors[0], tree);
+  let tempDoms = getDomBySingleSelector(selectors[0], tree);
   tempDoms = tempDoms.filter(dom => {
-    return selectors.any(sls => {
+    return selectors.every(sls => {
       if (sls.type === 'id') {
         return sls.name === dom.attr.id;
       } else if (sls.type === 'class') {
-        return dom.attr.class.indexOf(sls.name);
+        const domClasses = dom.attr.class;
+        return Array.isArray(domClasses) ? domClasses.indexOf(sls.name) >= 0 : domClasses === sls.name;
       } else if (sls.type === 'atrr') {
         const obj = sls.name.split(':');
         const key = obj[0];
@@ -100,19 +101,19 @@ let getDomByLinkSelector = (selectors, tree) => {
  * 连续选择器队列
  */
 let getDomByQueueSelector = (selectorQueue, tree) => {
-  if (selectorQueue.length === 1) {
-    if (!getDomByQueueSelector.doms) {
-      getDomByQueueSelector.doms = [];
+  let doms = [];
+  let innerGetDom = (selectorParser, tree) => {
+    if (selectorQueue.length === 1) {
+      doms = doms.concat(getDomByLinkSelector(selectorQueue[0], tree));
+    } else {
+      const nextDoms = getDomByLinkSelector(selectorQueue[0], tree);
+      nextDoms.forEach(dom => {
+        getDomByQueueSelector(selectorQueue.slice(1), dom);
+      });
     }
-    getDomByQueueSelector.doms = getDomByQueueSelector.doms.concat(getDomByLinkSelector(selectorQueue[0], tree));
-  } else {
-  	const nextDoms = getDomByLinkSelector(selectorQueue[0], tree);
-    
-    nextDoms.forEach(dom => {
-         getDomByQueueSelector(selectorQueue.slice(1), dom);
-    });
-    return getDomByQueueSelector.doms;
+    return doms;
   }
+  return innerGetDom(selectorQueue, tree);
 }
 
 /**
@@ -120,8 +121,16 @@ let getDomByQueueSelector = (selectorQueue, tree) => {
  */
 let getNodesBySelectorFn = (tree) => {
   return (selector) => {
-    const selectors = selectorParser(selector);
-    return getDomByQueueSelector(selectors. tree);
+    const isObject = Object.prototype.toString.call(selector) === '[object Object]';
+    // 判断参数是否是 object
+    console.log(isObject, 'isobject')
+    if (isObject) {
+      return new JsonTree(selector, true);
+    } else {
+      const selectors = selectorParser(selector);
+      const doms = getDomByQueueSelector(selectors, tree);
+      return doms;
+    }
   }
 }
 

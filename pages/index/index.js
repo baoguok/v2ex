@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+import homeService from '../../service/homePage.js';
 
 Page({
   data: {
@@ -109,7 +110,16 @@ Page({
   },
 
   onShow: function () {
-    
+    let nodeList =[];
+    homeService.getNodeList().then(res => {
+      nodeList = res;
+      console.log(res, 'res');
+      this.setData({
+        nodeList
+      });
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   // 切换节点

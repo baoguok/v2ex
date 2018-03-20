@@ -4,7 +4,7 @@ let json2html = require('./html2json.js').json2html;
 class JsonTree {
     constructor(html, isJson = false) {
         this.htmlStr =isJson ? json2html(html) : html;
-        this.htmlJson = isJson ? html :  html2json(htmlStr);
+        this.htmlJson = isJson ? html :  html2json(html);
         this.type = this.htmlJson.node;
         this.ele = this.type === 'element' ? this.htmlJson.tag : this.type;
         this.val = this.getNodeTextContent(this.htmlJson);
@@ -94,6 +94,7 @@ class JsonTree {
           text = cd.text;
         }
       });
+      return text;
     }
 }
 
