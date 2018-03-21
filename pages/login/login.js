@@ -137,6 +137,9 @@ Page({
           });
         }
       },
+      fail: (res) => {
+        console.log(res);
+      },
       complete: () => {
         wx.hideLoading();
         console.log('请求登录完成');

@@ -123,7 +123,6 @@ let getNodesBySelectorFn = (tree) => {
   return (selector) => {
     const isObject = Object.prototype.toString.call(selector) === '[object Object]';
     // 判断参数是否是 object
-    console.log(isObject, 'isobject')
     if (isObject) {
       return new JsonTree(selector, true);
     } else {
