@@ -65,7 +65,6 @@ class JsonTree {
       if (!tag) { return []; }
       return JsonTree.treeTravelsal(this.htmlJson, function (node) {
         if (node.node === 'element') {
-          console.log(node.tag, tag);
           return node.tag === tag;
         }
         return false;

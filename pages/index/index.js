@@ -5,101 +5,91 @@ import homeService from '../../service/homePage.js';
 
 Page({
   data: {
+    tab: '',
     nodeList: [],
-    postList: [
-      {
-        id: 1255,
-        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-        node: '最热',
-        author: '小王',
-        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
-        replyInfo: {
-          replyNum: 52,
-          lastReplyTime: '23分钟前',
-          lastReplyPersonName: '李白很帅'
-        }
-      },
-      {
-        id: 1255,
-        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-        node: '最热',
-        author: '小王',
-        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
-        replyInfo: {
-          replyNum: 52,
-          lastReplyTime: '23分钟前',
-          lastReplyPersonName: '李白很帅'
-        }
-      },
-      {
-        id: 1255,
-        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-        node: '最热',
-        author: '小王',
-        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
-        replyInfo: {
-          replyNum: 52,
-          lastReplyTime: '23分钟前',
-          lastReplyPersonName: '李白很帅'
-        }
-      },
-      {
-        id: 1255,
-        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-        node: '最热',
-        author: '小王',
-        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
-        replyInfo: {
-          replyNum: 52,
-          lastReplyTime: '23分钟前',
-          lastReplyPersonName: '李白很帅'
-        }
-      },
-      {
-        id: 1255,
-        avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-        node: '最热',
-        author: '小王',
-        title: '最新内容标题最新内容标题最新内容标题最新内容标题最新内容标题',
-        replyInfo: {
-          replyNum: 52,
-          lastReplyTime: '23分钟前',
-          lastReplyPersonName: '李白很帅'
-        }
-      }
-    ]
+    postList: []
   },
   onLoad: function () {
-    console.log(this.data.postList)
-    homeService.getTabPostList('tech');
+    console.log('onload');
   },
 
   onShow: function () {
     let nodeList =[];
+    let postList = [];
+    // 获取节点
     homeService.getNodeList().then(res => {
+      const currentTab = this.getCurrentTab();
+      const id = currentTab;
       nodeList = res;
       console.log(res, 'res');
+      nodeList = this.filterNodeOn(nodeList, id);
       this.setData({
-        nodeList
+        nodeList,
+        tab: currentTab
+      });
+    }).catch(err => {
+      console.error(err);
+    });
+    // 获取帖子
+    homeService.getTabPostList(this.data.tab).then(res => {
+      postList = res;
+      this.setData({
+        postList
       });
     }).catch(err => {
       console.error(err);
     });
   },
 
+  onHide: function () {
+    wx.setStorage({
+      key: 'currentTab',
+      data: this.data.tab
+    });
+  },
+
+  onUnload: function () {
+    wx.setStorage({
+      key: 'currentTab',
+      data: this.data.tab
+    });
+  },
+
   // 切换节点
   switchNode: function(e) {
     const id = e.target.dataset.id;
-    this.data.nodeList.forEach(node => {
+    const nodeList = this.filterNodeOn(this.data.nodeList, id);
+    this.setData({
+      tab: id,
+      nodeList
+    }, () => {
+      homeService.getTabPostList(id).then(res => {
+        this.setData({
+          postList: res
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+    });
+   
+  },
+
+  // 筛选
+  filterNodeOn(nodeList, id) {
+    nodeList.forEach(node => {
       if (node.id == id) {
         node.on = 1;
       } else {
         node.on = 0;
       }
     });
-    this.setData({nodeList: this.data.nodeList}, () => {
-        console.log(this.data.nodeList);
-    });
+    return nodeList;
+  },
+
+  // 获取当前所在节点
+  getCurrentTab() {
+    const currentTab = wx.getStorageSync('currentTab');
+    return currentTab ? currentTab : 'tech';
   },
 
   // 跳转到更多节点

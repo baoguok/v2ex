@@ -67,6 +67,7 @@
 }
 
 .post .center {
+  flex: 1;
   padding: 0rpx 10rpx;
 }
 
@@ -125,11 +126,11 @@
 .post .right .reply-num {
   display: block;
   height: 30rpx;
+  line-height: 30rpx;
   font-size: 26rpx;
   padding: 2rpx 10rpx;
   border-radius: 14rpx;
   background-color: #09bb07;
   color: #ffffff;
-
 }
 

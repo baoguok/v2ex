@@ -35,7 +35,7 @@
             <view class="main-line-title">
               {{ postInfo.title }}
             </view>
-            <view class="last-line-reply">
+            <view class="last-line-reply" hidden='{{ postInfo.replyInfo.replyNum == 0 }}'>
               <view class="reply-time">{{  postInfo.replyInfo.lastReplyTime  }}</view>
               <view class="reply-person"> 
                 最后回复<view class="name"> {{ ' ' + postInfo.replyInfo.lastReplyPersonName }}</view>

@@ -12,8 +12,7 @@ function getNodeList() {
   }).then((res) => {
     if (res.statusCode === 200) {
       const $ = domQuery(res.data);
-      nodeList = $('.tab_current').concat($('.tab'));
-      console.log(nodeList);
+      nodeList = $('.tab');
       nodeList = nodeList.map($node => {
         return {
           id: $node.attr.href.slice(6),
@@ -22,7 +21,6 @@ function getNodeList() {
         }
       });
     }
-    
     return Promise.resolve(nodeList);
   }).catch(err => {
     return Promise.reject(err);
@@ -40,26 +38,31 @@ function getTabPostList(tab) {
   }).then((res) => {
     if (res.statusCode === 200) {
       const $1 = domQuery(res.data);
-      console.log(res.data);
-      postList = $1('.cell.item').forEach(item => {
-        console.log(item);
+      postList = $1('.cell.item').map(item => {
         let $ = domQuery(item.htmlStr);
         const tempObj = $('td@width:auto a');
-        console.log(tempObj)
         const title = tempObj[0].val;
         const id = tempObj[0].attr.href;
-        const node = $('.node')[0].val;
+        const node = tempObj[1].val;
         const avatar = $('.avatar')[0].attr.src;
-        const author = tempObj[1].val;
-        console.log($('.small.fade'));
+        const author = tempObj[2].val;
+        const temp =(/\&nbsp;\•\&nbsp;\s+(.+)\s+\&nbsp;\•\&nbsp;/g).exec($('.small.fade')[0].val);
+        const lastReplyTime = temp ? temp[1] : '';
         const replyInfo = {
-          replyNum: $('.count_livid')[0].val,
-          lastReplyTime: (/(\d)./g).exec($('.small.fade').val)[1],
-          lastReplyPersonName: tempObj[2].val
+          replyNum: $('.count_livid')[0] ? $('.count_livid')[0].val : 0,
+          lastReplyTime,
+          lastReplyPersonName: tempObj[3] ? tempObj[3].val : ''
+        };
+        return {
+          id,
+          avatar,
+          node,
+          author,
+          title,
+          replyInfo
         }
       });
     }
-    console.log(postList, 'postList');
     return Promise.resolve(postList);
   }).catch(err => {
     return Promise.reject(err);

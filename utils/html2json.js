@@ -22,7 +22,6 @@ let htmltojson = function htmltojson() {
       node: 'root',
       child: [],
     };
-    console.log(htmlparser);
     HTMLParser(html, {
       start: function (tag, attrs, unary) {
         debug(tag, attrs, unary);

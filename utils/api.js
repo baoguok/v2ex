@@ -34,7 +34,14 @@ export function downloadFileRequest(config) {
           code: '10001',
           msg: '请求失败'
         })
+      },
+      complete: function() {
+       wx.hideLoading();
       }
+    });
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
     });
     wx.request(cfg);
   });
