@@ -7,9 +7,10 @@ import JsonTree from './jsonTree';
  */
 let selectorParser = (selector) => {
   let selectors = selector && selector.split(/\s+/);
-  const reg = /^.+(#|\.)/g;
+  const reg = /(#|\.|@)/g;
   selectors = selectors.map((selector, index) => {
     let sls = selector.replace(reg, ',$1').split(',');
+    sls = !!sls[0] ? sls : sls.slice(1);
     return sls.map(sl => {
       let type = '';
       let name = '';
@@ -83,12 +84,12 @@ let getDomByLinkSelector = (selectors, tree) => {
         return sls.name === dom.attr.id;
       } else if (sls.type === 'class') {
         const domClasses = dom.attr.class;
-        return Array.isArray(domClasses) ? domClasses.indexOf(sls.name) >= 0 : domClasses === sls.name;
-      } else if (sls.type === 'atrr') {
+        return domClasses.indexOf(sls.name) >= 0;
+      } else if (sls.type === 'attr') {
         const obj = sls.name.split(':');
         const key = obj[0];
         const val = obj[1];
-        return dom.atrr[key] === val;
+        return dom.attr[key] === val;
       } else {
         return dom.tag === sls.name
       }
@@ -102,18 +103,18 @@ let getDomByLinkSelector = (selectors, tree) => {
  */
 let getDomByQueueSelector = (selectorQueue, tree) => {
   let doms = [];
-  let innerGetDom = (selectorParser, tree) => {
+  let innerGetDom = (selectorQueue, tree) => {
     if (selectorQueue.length === 1) {
       doms = doms.concat(getDomByLinkSelector(selectorQueue[0], tree));
     } else {
       const nextDoms = getDomByLinkSelector(selectorQueue[0], tree);
       nextDoms.forEach(dom => {
-        getDomByQueueSelector(selectorQueue.slice(1), dom);
+        innerGetDom(selectorQueue.slice(1), new JsonTree(dom, true));
       });
     }
-    return doms;
   }
-  return innerGetDom(selectorQueue, tree);
+  innerGetDom(selectorQueue, tree);
+  return  doms;
 }
 
 /**
@@ -123,13 +124,12 @@ let getNodesBySelectorFn = (tree) => {
   return (selector) => {
     const isObject = Object.prototype.toString.call(selector) === '[object Object]';
     // 判断参数是否是 object
-    console.log(isObject, 'isobject')
     if (isObject) {
       return new JsonTree(selector, true);
     } else {
       const selectors = selectorParser(selector);
       const doms = getDomByQueueSelector(selectors, tree);
-      return doms;
+      return doms.map(dom => new JsonTree(dom, true));
     }
   }
 }
@@ -138,7 +138,8 @@ let getNodesBySelectorFn = (tree) => {
  * 入口函数
  */
 let domQuery = (htmlStr) => {
-    let tree = new JsonTree(htmlStr, false);
+    const isObject = Object.prototype.toString.call(htmlStr) === '[object Object]';
+    let tree = new JsonTree(htmlStr, isObject);
     return getNodesBySelectorFn(tree);
 }
 

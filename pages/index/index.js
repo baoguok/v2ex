@@ -107,6 +107,7 @@ Page({
   },
   onLoad: function () {
     console.log(this.data.postList)
+    homeService.getTabPostList('tech');
   },
 
   onShow: function () {
@@ -136,6 +137,7 @@ Page({
         console.log(this.data.nodeList);
     });
   },
+
   // 跳转到更多节点
   navigatToMoreNodes() {
     wx.navigateTo({

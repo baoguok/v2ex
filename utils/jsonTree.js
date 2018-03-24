@@ -38,7 +38,7 @@ class JsonTree {
       return JsonTree.treeTravelsal(this.htmlJson, function (node) {
         if (node.attr && node.attr.class) {
           const className = node.attr.class;
-          return Array.isArray(className) ? (className.indexOf(cs) > 0) : (className === cs) 
+          return className.indexOf(cs) >= 0; 
         }
         return false;
       });
@@ -65,6 +65,7 @@ class JsonTree {
       if (!tag) { return []; }
       return JsonTree.treeTravelsal(this.htmlJson, function (node) {
         if (node.node === 'element') {
+          console.log(node.tag, tag);
           return node.tag === tag;
         }
         return false;
