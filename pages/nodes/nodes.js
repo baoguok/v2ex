@@ -1,158 +1,13 @@
 // pages/nodes/nodes.js
+import nodesService from '../../service/nodes.js';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectedNodeList: [{
-      id: 1,
-      name: '发现',
-      on: 0
-    }, {
-      id: 2,
-      name: '最热',
-      on: 0
-    }, {
-      id: 3,
-      name: '问与答',
-      on: 0
-    }, {
-      id: 4,
-      name: 'Apple',
-      on: 0
-    }, {
-      id: 5,
-      name: '技术',
-      on: 0
-    }, {
-      id: 6,
-      name: '问与答',
-      on: 0
-    }, {
-      id: 7,
-      name: '问与答',
-      on: 0
-    }, {
-      id: 8,
-      name: '问与答',
-      on: 0
-    }, {
-      id: 9,
-      name: '问与答',
-      on: 0
-    }],
-    allNodeList: [
-        {
-            id: 10,
-            name: '分享与创造',
-            childNodes: [
-                {
-                    id: 6,
-                    name: '问与答'
-                }, {
-                    id: 7,
-                    name: '问与答'
-                }, {
-                    id: 8,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }
-            ]
-        },
-        {
-            id: 11,
-            name: '分享与创造',
-            childNodes: [
-                {
-                    id: 6,
-                    name: '问与答'
-                }, {
-                    id: 7,
-                    name: '问与答'
-                }, {
-                    id: 8,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }
-            ]
-        },
-        {
-            id: 12,
-            name: '分享与创造',
-            childNodes: [
-                {
-                    id: 6,
-                    name: '问与答'
-                }, {
-                    id: 7,
-                    name: '问与答'
-                }, {
-                    id: 8,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }
-            ]
-        },
-        {
-            id: 13,
-            name: '分享与创造',
-            childNodes: [
-                {
-                    id: 6,
-                    name: '问与答'
-                }, {
-                    id: 7,
-                    name: '问与答'
-                }, {
-                    id: 8,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }, {
-                    id: 9,
-                    name: '问与答'
-                }
-            ]
-        }
-    ]
+    allNodeList: []
   },
 
   /**
@@ -173,7 +28,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    nodesService.getNodeList().then((res) => {
+      this.setData({
+        allNodeList: res
+      });
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   /**

@@ -1,17 +1,12 @@
 <!--pages/nodes/nodes.wxml-->
 <view>
-  <view class="selected-node-list">
-    <view wx:for="{{selectedNodeList}}"
-          wx:key="id"
-          data-id="{{item.id}}"
-          bindtap="switchNode"
-          class="node {{ !!item.on ? 'on' : '' }}"
-    >
-      {{ item.name }}
-    </view>
-  </view>
   <view class="all-node-list">
-    <view wx:for="{{ allNodeList }}" wx:for-item="parentNode" class="nodes clearfix">
+    <view 
+      wx:for="{{ allNodeList }}" 
+      wx:for-item="parentNode"
+      wx:key="{{ parentNode.id }}"  
+      class="nodes clearfix"
+    >
       <view class="parent-node" 
             data-id="{{ parentNode.id }}"
             >
