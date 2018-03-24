@@ -5,43 +5,7 @@ import homeService from '../../service/homePage.js';
 
 Page({
   data: {
-    nodeList: [{
-        id: 1,
-        name: '发现',
-        on: 0
-    },{
-        id: 2,
-        name: '最热',
-        on: 0
-    },{
-        id: 3,
-        name: '问与答',
-        on: 0
-    },{
-        id: 4,
-        name: 'Apple',
-        on: 0
-    },{
-        id: 5,
-        name: '技术',
-        on: 0
-    },{
-        id: 6,
-        name: '问与答',
-        on: 0
-    },{
-        id: 7,
-        name: '问与答',
-        on: 0
-    },{
-        id: 8,
-        name: '问与答',
-        on: 0
-    },{
-        id: 9,
-        name: '问与答',
-        on: 0
-    }],
+    nodeList: [],
     postList: [
       {
         id: 1255,

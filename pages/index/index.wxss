@@ -1,5 +1,7 @@
 /**index.wxss**/
 .container {
+  display: flex;
+  flex-flow: column nowrap;
   height: 100vh;
 }
 
@@ -7,17 +9,16 @@
     position: fixed;
     top: 0;
     z-index: 10;
-    display: flex;
+    width: 100%;
+    height: 166rpx;
+    overflow: scroll;
     box-sizing: border-box;
-    height: 180rpx;
-    padding: 30rpx;
-    flex-flow: row wrap;
-    justify-content: flex-start;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     background-color: #fff;
 }
 
 .node-list .node {
+  float: left;
   padding: 10rpx;
   margin: 0 10rpx;
   margin-bottom: 10px;
@@ -36,10 +37,11 @@
   border: none;
 }
 
+
 .post-list {
-  width: 100%;
+  flex: 1;
   height: 100%;
-  padding-top: 180rpx;
+  padding-top: 166rpx;
   box-sizing: border-box;
 }
 
