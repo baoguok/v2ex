@@ -1,5 +1,8 @@
 @import 'static/style/weui.wxss';
-
+page {
+  height: 100%;
+  box-sizing: border-box;
+}
 .clearfix:after {
     content: '';
     display: block;

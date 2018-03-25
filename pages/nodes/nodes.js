@@ -14,7 +14,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    // 获取所有节点
+    nodesService.getNodeList().then((res) => {
+      this.setData({
+        allNodeList: res
+      });
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   /**
@@ -28,13 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    nodesService.getNodeList().then((res) => {
-      this.setData({
-        allNodeList: res
-      });
-    }).catch(err => {
-      console.error(err);
-    });
+    
   },
 
   /**
@@ -51,24 +52,11 @@ Page({
   
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  handleNodeClick(e) {
+    const node = e.target.dataset.id;
+    const name = e.target.dataset.name;
+    wx.navigateTo({
+      url: `/pages/nodepage/nodepage?node=${node}&name=${name}`
+    });
   }
 })

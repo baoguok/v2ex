@@ -21,7 +21,7 @@ function getNodeList() {
         if (index === 0 ) {return {};}
         const childNodes = item$('a').map(a => {
           return {
-            id: a.attr.href.slice(5),
+            id: a.attr.href.slice(4),
             name: a.val
           };
         });

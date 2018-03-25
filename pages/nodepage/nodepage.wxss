@@ -1,52 +1,11 @@
-/* pages/post/post.wxss */
-.post-content {
-  padding: 20rpx;
-  box-sizing: border-box;
-  border-bottom: 1rpx solid #999999;
+/* pages/nodepage/nodepage.wxss */
+.node-post-page {
+  height: 100%;
 }
-
-.post-content .post-title {
-  display: block;
-  font-size: 40rpx;
-  margin-bottom: 20rpx;
+.post-list {
+  height: 100%;
 }
-
-.post-content .author-info {
-  display: grid;
-  grid-template-columns: 80rpx auto;
-  width: 100%;
-}
-.author-info .author-avatar {
-  display: flex;
-  align-items: center;
-}
-.author-info .author-avatar image {
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 8rpx;
-}
-
-.author-info .right .author-name {
-  font-size: 32rpx;
-}
-
-.author-info .right .post-statistics {
-  font-size: 28rpx;
-  color: gray;
-}
-
-.post-content .content {
-  margin: 20rpx 0;
-  font-size: 36rpx;
-}
-
-.reply-list {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 20rpx;
-}
-
-.reply-list .reply {
+.post-list .post {
   display: flex;
   width: 100%;
   padding: 20rpx;
@@ -55,7 +14,7 @@
   border-bottom: 1px solid #f6f6f6;
 }
 
-.reply .left {
+.post .left {
 }
 
 .left image {
@@ -67,7 +26,8 @@
   margin-top: 0;
 }
 
-.reply .center {
+.post .center {
+  flex: 1;
   padding: 0rpx 10rpx;
 }
 
@@ -90,7 +50,6 @@
 
 .main-line-title {
   padding-top: 15rpx;
-  word-break: break-all;
   font-size: 26rpx;
   line-height: 36rpx;
   color: #353535;
@@ -119,18 +78,19 @@
   color: #353535;
 }
 
-.reply .right {
+.post .right {
   display: flex;
   align-items: center;
 }
 
-.reply .right .reply-num {
+.post .right .reply-num {
   display: block;
   height: 30rpx;
+  line-height: 30rpx;
   font-size: 26rpx;
   padding: 2rpx 10rpx;
   border-radius: 14rpx;
   background-color: #09bb07;
   color: #ffffff;
-
 }
+

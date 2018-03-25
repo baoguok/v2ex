@@ -1,15 +1,21 @@
 <view class="post-detail">
   <view class="post-content">
-      <view class="author-info">
-        <view class="author-avatar"><image src="{{ author.avatar }}"></image></view>
-        <view class="author-name">{{ author.nickname }}</view>
-      </view>
       <text class="post-title">{{ post.title  }}</text>
-      <text class="post-info">
-        <text class="post-time">{{ post.lastReply }}</text>
-        <text class="post-click-times">{{ post.clickTimes }}</text>
-      </text>
-      <view class="content">{{ post.content }}</view>
+      <view class="author-info">
+        <view class="author-avatar left"><image src="{{ author.avatar }}"></image></view>
+        <view class='right'>
+          <view class="author-name">{{ author.nickname }}</view>
+          <view class='post-statistics'>
+            <text class="post-time">{{ post.lastReply }}发布</text>
+            <text class="post-click-times">, {{ post.clickTimes }}次点击</text>
+          </view>
+        </view>
+      </view>
+      <view class="content">
+        <rich-text nodes="{{ post.content }}"></rich-text>
+      </view>
+      <view>
+      </view>
   </view>
   <view class="reply-list">
     <block

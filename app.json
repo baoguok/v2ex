@@ -5,7 +5,8 @@
     "pages/my/my",
     "pages/nodes/nodes",
     "pages/post/post",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/nodepage/nodepage"
   ],
   "window": {
     "backgroundTextStyle": "white",

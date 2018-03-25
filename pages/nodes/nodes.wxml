@@ -18,6 +18,8 @@
               wx:for="{{ parentNode.childNodes }}"
               wx:key="{{ childNode.id }}"
               data-id="{{ childNode.id }}"
+              data-name="{{ childNode.name }}"
+              bindtap='handleNodeClick'
         >
           {{ childNode.name }}
         </view>
