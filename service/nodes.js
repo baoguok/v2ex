@@ -12,10 +12,8 @@ function getNodeList() {
   }).then((res) => {
     if (res.statusCode === 200) {
       const $ = domQuery(res.data);
-      const container = $('.content .box')[8];
-      console.log(container);
+      const container = $('.content .box')[1];
       const nodes$ = domQuery(container.htmlStr);
-      console.log(nodes$('.cell'))
       nodeList = nodes$('.cell').map((item, index) => {
         const item$ = domQuery(item.htmlStr);
         if (index === 0 ) {return {};}

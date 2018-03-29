@@ -41,12 +41,12 @@ function getTabPostList(tab) {
       postList = $1('.cell.item').map(item => {
         let $ = domQuery(item.htmlStr);
         const tempObj = $('td@width:auto a');
-        const title = tempObj[0].val;
-        const id = tempObj[0].attr.href;
-        const node = tempObj[1].val;
+        const title = tempObj[2].val;
+        const id = tempObj[2].attr.href;
+        const node = tempObj[0].val;
         const avatar = $('.avatar')[0].attr.src;
-        const author = tempObj[2].val;
-        const temp =(/\&nbsp;\•\&nbsp;\s+(.+)\s+\&nbsp;\•\&nbsp;/g).exec($('.small.fade')[0].val);
+        const author = tempObj[1].val;
+        const temp =(/^(.+)\s*\&nbsp;\•\&nbsp;/g).exec($('.small.fade')[1].val);
         const lastReplyTime = temp ? temp[1] : '';
         const replyInfo = {
           replyNum: $('.count_livid')[0] ? $('.count_livid')[0].val : 0,

@@ -1,4 +1,6 @@
 // pages/post/post.js
+import postService from '../../service/post.js';
+
 Page({
 
   /**
@@ -27,7 +29,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    const { id } = options;
+    console.log(id);
+    postService.getPostContent(id).then(res => {
+      const {avatar, nickname, title, lastReply, clickTimes, content} = res;
+      this.setData({
+        author: {
+          avatar,
+          nickname
+        },
+        post: {
+          title,
+          lastReply,
+          clickTimes,
+          content
+        }
+      })
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   /**

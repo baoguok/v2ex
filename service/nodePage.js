@@ -12,20 +12,20 @@ function getNodePost(node, page) {
   }).then((res) => {
     if (res.statusCode === 200) {
       const $1 = domQuery(res.data);
-      postList = $1('#TopicsNode .cell').map(item => {
+      postList = $1('.box .cell').map(item => {
         let $ = domQuery(item.htmlStr);
         const tempObj = $('td@width:auto a');
         console.log(tempObj);
-        const title = tempObj[0].val;
+        const title = tempObj[1].val;
         const id = tempObj[0].attr.href;
         const avatar = $('.avatar')[0].attr.src;
-        const author = tempObj[1].val;
+        const author = $('.small.fade strong')[0].val;
         const temp = (/\&nbsp;\•\&nbsp;\s+(.+)\s+\&nbsp;\•\&nbsp;/g).exec($('.small.fade')[0].val);
         const lastReplyTime = temp ? temp[1] : '';
         const replyInfo = {
           replyNum: $('.count_livid')[0] ? $('.count_livid')[0].val : 0,
           lastReplyTime,
-          lastReplyPersonName: tempObj[2] ? tempObj[2].val : ''
+          lastReplyPersonName: ''
         };
         return {
           id,
