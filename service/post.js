@@ -24,9 +24,15 @@ function getPostContent(id) {
       postContent.content = mkcontent ? mkcontent.htmlStr : '';
       let other$ = domQuery($('.content .box')[1].htmlStr);
       const replyInfoReg = /^(\d+)\s*回复.*直到\s*(.+)$/g;
-      const replyInfo = replyInfoReg.exec(other$('.cell .gray')[0].val);
-      postContent.replyTimes = replyInfo[1];
-      postContent.replyMoment = replyInfo[2];
+      if (other$('.cell .gray').length > 0) {
+        const replyInfo = replyInfoReg.exec(other$('.cell .gray')[0].val);
+        postContent.replyTimes = replyInfo[1];
+        postContent.replyMoment = replyInfo[2];
+      } else {
+        postContent.replyTimes = '';
+        postContent.replyMoment = '';
+      }
+      
     }
     return Promise.resolve(postContent);
   }).catch(err => {
@@ -36,14 +42,15 @@ function getPostContent(id) {
 
 function getPostRepliesByPage(id, page) {
     let postReplies = [];
+    const url = id.slice(0, id.indexOf('#'));
     return downloadFileRequest({
-        url: `https://www.v2ex.com${id}`,
+        url: `https://www.v2ex.com${url}?p=${page}`,
         method: 'GET'
     }).then((res) => {
         if (res.statusCode === 200) {
           const $ = domQuery(res.data);
           const reply$ = domQuery($('.content .box')[1].htmlStr);
-        postReplies = reply$('.cell').slice(1).map(cell => {
+          postReplies = reply$('.cell').slice(1).concat([reply$('.inner')[0]]).map(cell => {
             const cell$ = domQuery(cell.htmlStr);
             const avatar = cell$('img')[0].attr.src;
             const floorNum = cell$('.no')[0].val;

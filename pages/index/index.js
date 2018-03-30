@@ -99,9 +99,11 @@ Page({
     });
   },
 
-  toPostDetail() {
+  toPostDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    const postnum = e.currentTarget.dataset.postnum;
     wx.navigateTo({
-      url: '/pages/post/post',
+      url: '/pages/post/post?id=' + id + '&postnum=' + postnum,
     });
   },
 

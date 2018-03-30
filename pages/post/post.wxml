@@ -28,7 +28,7 @@
         </view>
         <view class="center" bindtap="toPostDetail">
           <view class="first-line clearfix">
-            <view class='athor'>{{ replyItem.name }}</view>
+            <view class='athor'>{{ replyItem.name }} · {{ replyItem.floorNum }} 楼</view>
           </view>
           <rich-text class="main-line-title" nodes="{{ replyItem.content }}"></rich-text>
           <view class="last-line-reply">

@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "节点"
+  "navigationBarTitleText": "节点",
+  "backgroundTextStyle": "white",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#fff"
 }

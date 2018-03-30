@@ -27,7 +27,7 @@
 }
 
 .author-info .right .author-name {
-  font-size: 32rpx;
+  font-size: 24rpx;
 }
 
 .author-info .right .post-statistics {
@@ -37,6 +37,7 @@
 
 .post-content .content {
   margin: 20rpx 0;
+  width: 100%;
   font-size: 36rpx;
 }
 
