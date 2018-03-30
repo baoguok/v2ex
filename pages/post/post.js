@@ -77,7 +77,6 @@ Page({
       return;
     }
     postService.getPostRepliesByPage(id, page).then(res => {
-      const replies = res;
       let replies = [];
       replies = replies.concat(res.reverse()).concat(this.data.replies);
       this.setData({
