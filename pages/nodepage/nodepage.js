@@ -89,8 +89,9 @@ Page({
   // 跳转到帖子详情
   toPostDetail(e) {
     const id = e.currentTarget.dataset.id;
+    const postnum = e.currentTarget.dataset.postnum;
     wx.navigateTo({
-      url: '/pages/post/post?id='+id
+      url: '/pages/post/post?id=' + id + '&postnum=' + postnum
     });
   },
 

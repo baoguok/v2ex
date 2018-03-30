@@ -8,31 +8,33 @@ Page({
    */
   data: {
     author: {
-      avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-      nickname: '作者',
+      avatar: '',
+      nickname: '',
     },
     post: {
-      title: '标题标题标题标题标题',
-      lastReply: '24分钟前',
-      clickTimes: 5622,
-      content: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容'
+      title: '',
+      lastReply: '',
+      clickTimes: 0,
+      content: ''
     },
-    replies: [{
-      avatar: 'https://wx.qlogo.cn/mmopen/vi_32/AZVz8lUszY4b31iaSwFEDPYkR2TcUUhZGowQmw1OndmYgyMbZc3ckBJ2x0jBVJXLg413faibUop4FPiaFMb0jaIIw/0',
-      name: '回复人1',
-      content: 'blablablablablablablablasdfdsfblablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla',
-      replyTime: '一个小时前'
-    }]
+    replies: [],
+    replyPage: 1,
+    id: '',
+    postnum: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id } = options;
-    console.log(id);
+    const { id, postnum } = options;
+    const page = this.data.page;
+    this.setData({
+      id,
+      postnum
+    });
     postService.getPostContent(id).then(res => {
-      const {avatar, nickname, title, lastReply, clickTimes, content} = res;
+      const {avatar, nickname, title, createTime, clickTimes, content, replyTimes, replyMoment} = res;
       this.setData({
         author: {
           avatar,
@@ -40,10 +42,21 @@ Page({
         },
         post: {
           title,
-          lastReply,
+          createTime,
           clickTimes,
-          content
+          content,
+          replyTimes,
+          replyMoment
         }
+      })
+    }).catch(err => {
+      console.error(err);
+    });
+
+    postService.getPostRepliesByPage(id, page).then(res => {
+      const replies = res;
+      this.setData({
+          replies: replies.reverse()
       })
     }).catch(err => {
       console.error(err);
@@ -51,45 +64,28 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    const page = this.data.page + 1;
+    const id = this.data.id;
+    if (this.data.replies.length < this.data.page*64) {
+      wx.showToast({
+        title: '没有更多回复了',
+        icon: 'none'
+      });
+      return;
+    }
+    postService.getPostRepliesByPage(id, page).then(res => {
+      const replies = res;
+      let replies = [];
+      replies = replies.concat(res.reverse()).concat(this.data.replies);
+      this.setData({
+        replies
+      })
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   /**

@@ -91,7 +91,7 @@ class JsonTree {
       let text = '';
       node.child && node.child.forEach(cd => {
         if (cd.node === 'text') {
-          text = cd.text;
+          text += cd.text;
         }
       });
       return text;

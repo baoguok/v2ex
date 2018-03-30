@@ -84,7 +84,7 @@ let getDomByLinkSelector = (selectors, tree) => {
         return sls.name === dom.attr.id;
       } else if (sls.type === 'class') {
         const domClasses = dom.attr.class;
-        return domClasses.indexOf(sls.name) >= 0;
+        return domClasses ? domClasses.indexOf(sls.name) >= 0 : false;
       } else if (sls.type === 'attr') {
         const obj = sls.name.split(':');
         const key = obj[0];

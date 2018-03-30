@@ -6,7 +6,7 @@
         <view class='right'>
           <view class="author-name">{{ author.nickname }}</view>
           <view class='post-statistics'>
-            <text class="post-time">{{ post.lastReply }}发布</text>
+            <text class="post-time">{{ post.createTime }}发布</text>
             <text class="post-click-times">, {{ post.clickTimes }}次点击</text>
           </view>
         </view>
@@ -30,11 +30,9 @@
           <view class="first-line clearfix">
             <view class='athor'>{{ replyItem.name }}</view>
           </view>
-          <view class="main-line-title">
-            {{ replyItem.content }}
-          </view>
+          <rich-text class="main-line-title" nodes="{{ replyItem.content }}"></rich-text>
           <view class="last-line-reply">
-            <view class="reply-time">{{  replyItem.replyTime  }}</view>
+            <view class="reply-time">{{  replyItem.time  }}</view>
           </view>
         </view>
       </view>

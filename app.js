@@ -35,7 +35,7 @@ App({
 
       // 跳转到登录页
       wx.redirectTo({
-        url: 'pages/index/index',
+        url: 'pages/nodes/nodes',
       });
     }
   },

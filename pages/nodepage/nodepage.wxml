@@ -16,7 +16,7 @@
           <view class="left clearfix">
               <image src="{{ postInfo.avatar }}"></image>
           </view>
-          <view class="center" data-id="{{ postInfo.id }}" bindtap="toPostDetail">
+          <view class="center" data-postnum="{{ postInfo.replyInfo.replyNum }}" data-id="{{ postInfo.id }}" bindtap="toPostDetail">
             <view class="first-line clearfix">
               <view class="node">{{ postInfo.node }}</view>
               <view class='athor'>{{ postInfo.author }}</view>
@@ -25,10 +25,8 @@
               {{ postInfo.title }}
             </view>
             <view class="last-line-reply" hidden='{{ postInfo.replyInfo.replyNum == 0 }}'>
-              <view class="reply-time">{{  postInfo.replyInfo.lastReplyTime  }}</view>
-              <view class="reply-person"> 
-                最后回复<view class="name"> {{ ' ' + postInfo.replyInfo.lastReplyPersonName }}</view>
-              </view>
+            <view class="reply-time">{{  postInfo.charNum  }} 个字符</view>
+              <view class="reply-time">{{  postInfo.clickTimes  }} 次点击</view>
             </view>
           </view>
           <view class="right clearfix">
