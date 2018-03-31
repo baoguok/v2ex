@@ -15,7 +15,7 @@ function getPersonInfo() {
       res.data = fixHtmlParserBug(res.data);
       const $ = domQuery(res.data);
       const nickname = $('.content td@width:auto a')[0].attr.href.slice(8);
-      const avatar = $('.content td@width:auto a img')[0].attr.src;
+      const avatar = 'https:'+$('.content td@width:auto a img')[0].attr.src;
       info = {
         nickname,
         avatar

@@ -16,7 +16,7 @@ function getPostContent(id) {
       const $ = domQuery(res.data);
       const container = $('.content .box')[0];
       const content$ = domQuery(container.htmlStr);
-      postContent.avatar = content$('.header .fr img')[0].attr.src;
+      postContent.avatar = 'https:'+content$('.header .fr img')[0].attr.src;
       postContent.title = content$('.header h1')[0].val;
       postContent.nickname = content$('.header small.gray a')[0].val;
       var tempContent = /at\s*(.+)\,\s*(\d+)\s*次点击/g.exec(content$('.header small.gray')[0].val);
@@ -55,7 +55,7 @@ function getPostRepliesByPage(id, page) {
           const reply$ = domQuery($('.content .box')[1].htmlStr);
           postReplies = reply$('.cell').slice(1).concat([reply$('.inner')[0]]).map(cell => {
             const cell$ = domQuery(cell.htmlStr);
-            const avatar = cell$('img')[0].attr.src;
+            const avatar = 'https:'+cell$('img')[0].attr.src;
             const floorNum = cell$('.no')[0].val;
             const name = cell$('a.dark')[0].val;
             const replyInfoReg = /^(.+)\s*via\s*(.+)$/g;

@@ -18,7 +18,7 @@ function getNodePost(node, page) {
         console.log(tempObj);
         const title = tempObj[0].val;
         const id = tempObj[0].attr.href;
-        const avatar = $('.avatar')[0].attr.src;
+        const avatar = 'https:'+$('.avatar')[0].attr.src;
         const author = $('.small.fade strong')[0].val;
         const temp = (/\&nbsp;\•\&nbsp;\s*(\d+)\s*个字符\s*\&nbsp;\•\&nbsp;\s*(\d+)\s*次点击/g).exec($('.small.fade')[0].val);
         const charNum = temp[1];

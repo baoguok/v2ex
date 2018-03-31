@@ -48,7 +48,7 @@ function getTabPostList(tab) {
         const title = tempObj[2].val;
         const id = tempObj[2].attr.href;
         const node = tempObj[0].val;
-        const avatar = $('.avatar')[0].attr.src;
+        const avatar = 'https:'+$('.avatar')[0].attr.src;
         const author = tempObj[1].val;
         const temp =(/^(.+)\s*\&nbsp;\•\&nbsp;/g).exec($('.small.fade')[1].val);
         const lastReplyTime = temp ? temp[1] : '';
