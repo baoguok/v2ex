@@ -27,13 +27,7 @@
         "text": "主页",
         "iconPath": "static/images/home.png",
         "selectedIconPath": "static/images/home_selected.png"
-      },
-      {
-        "pagePath": "pages/collection/collection",
-        "text": "收藏",
-        "iconPath": "static/images/collection.png",
-        "selectedIconPath": "static/images/collection_selected.png"
-      },
+       },
       {
         "pagePath": "pages/my/my",
         "text": "我",

@@ -40,7 +40,7 @@
           bindinput="onCapchaInput"
         />
       </view>
-      <view class="weui-cell__ft" bindtap='refreshCapcha' >
+      <view class="weui-cell__ft" bindtap='refresPage' >
         <image class="weui-vcode-img" src="{{ capcha }}" style="width: 135px"></image>
       </view>
     </view>

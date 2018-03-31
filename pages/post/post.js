@@ -1,6 +1,6 @@
 // pages/post/post.js
 import postService from '../../service/post.js';
-
+import { ifNotLoginRedirect } from '../../utils/loginUtil.js';
 Page({
 
   /**
@@ -27,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    ifNotLoginRedirect();
     const { id, postnum } = options;
     const replyPage = Math.ceil(postnum/100);
     this.setData({

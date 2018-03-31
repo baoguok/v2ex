@@ -1,5 +1,6 @@
 // pages/nodepage/nodepage.js
 import nodePageService from '../../service/nodePage.js';
+import { ifNotLoginRedirect } from '../../utils/loginUtil.js';
 
 Page({
 
@@ -19,6 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    ifNotLoginRedirect();
     const nodeId = options.node;
     const nodeName = options.name;
     this.setData({

@@ -33,6 +33,18 @@
     text-align: center;
 }
 
+.user-info .user-des {
+    width: 80%;
+    font-size: 28rpx;
+    margin: 0 auto;
+    margin-top: 15rpx;
+    text-align: center;
+}
+
 .setting-container {
   margin-top: 20rpx;
+}
+
+.logout-btn {
+  width: 90%;
 }

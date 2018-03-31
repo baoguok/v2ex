@@ -1,6 +1,6 @@
 import domQuery from '../utils/domQuery.js';
 import {downloadFileRequest} from '../utils/api.js';
-
+import { fixHtmlParserBug } from '../utils/util.js';
 /**
  * 获取节点列表
  */
@@ -11,6 +11,8 @@ function getNodeList() {
     method: 'GET'
   }).then((res) => {
     if (res.statusCode === 200) {
+      // 临时解决htmlparse 解析问题
+      res.data = fixHtmlParserBug(res.data);
       const $ = domQuery(res.data);
       nodeList = $('.tab');
       nodeList = nodeList.map($node => {
@@ -37,6 +39,8 @@ function getTabPostList(tab) {
     method: 'GET'
   }).then((res) => {
     if (res.statusCode === 200) {
+      // 临时解决htmlparse 解析问题
+      res.data = fixHtmlParserBug(res.data);
       const $1 = domQuery(res.data);
       postList = $1('.cell.item').map(item => {
         let $ = domQuery(item.htmlStr);

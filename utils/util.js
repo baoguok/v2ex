@@ -14,6 +14,14 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// 临时解决htmlparse 解析问题
+const fixHtmlParserBug = (data) => {
+  let tempStr = /\<div\s+class\=\"cell\"\>\<table\s+cellpadding.+条未读提醒.+\<\/table\>\<\/div\>/g;
+  data = data.replace(tempStr, '');
+  return data;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  fixHtmlParserBug
 }

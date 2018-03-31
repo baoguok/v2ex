@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 import homeService from '../../service/homePage.js';
+import {ifNotLoginRedirect} from '../../utils/loginUtil.js';
 
 Page({
   data: {
@@ -10,12 +11,9 @@ Page({
     postList: []
   },
   onLoad: function () {
-    console.log('onload');
-  },
-
-  onShow: function () {
-    let nodeList =[];
+    let nodeList = [];
     let postList = [];
+    ifNotLoginRedirect();
     // 获取节点
     homeService.getNodeList().then(res => {
       const currentTab = this.getCurrentTab();
@@ -39,6 +37,10 @@ Page({
     }).catch(err => {
       console.error(err);
     });
+  },
+
+  onShow: function () {
+    
   },
 
   onHide: function () {

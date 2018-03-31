@@ -1,6 +1,6 @@
 // pages/nodes/nodes.js
 import nodesService from '../../service/nodes.js';
-
+import { ifNotLoginRedirect } from '../../utils/loginUtil.js';
 Page({
 
   /**
@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    ifNotLoginRedirect();
     // 获取所有节点
     nodesService.getNodeList().then((res) => {
       this.setData({

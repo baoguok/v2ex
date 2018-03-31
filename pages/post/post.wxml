@@ -12,7 +12,7 @@
         </view>
       </view>
       <view class="content">
-        <rich-text nodes="{{ post.content }}"></rich-text>
+        <rich-text class='rich-content-container' nodes="{{ post.content }}"></rich-text>
       </view>
       <view>
       </view>

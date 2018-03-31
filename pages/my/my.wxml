@@ -1,18 +1,3 @@
-<wxs module="my">
-    var settingList = [{
-        id: '123',
-        icon: '/static/images/my.png',
-        content: '我的名片'
-    },{
-        id: '124',
-        icon: '/static/images/home.png',
-        content: '我的发言'
-    }];
-    console.log(JSON.stringify(settingList[0]));
-    module.exports = {
-        settingList: settingList
-    }
-</wxs>
 
 <view class="person-center">
     <view class="user-info" >
@@ -22,9 +7,14 @@
         <view class="user-name">
             <text>{{ userInfo.nickName }}</text>
         </view>
+        <view class="user-des">
+            <text>{{ userInfo.description }}</text>
+        </view>
     </view>
 
     <view class="setting-container">
-        <setting-list list="{{ my.settingList }}"></setting-list>
+        <setting-list list="{{ settingList }}"></setting-list>
     </view>
+
+    <button class="weui-btn logout-btn" type="default" bindtap='logout'> 退出登录 </button>
 </view>

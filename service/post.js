@@ -1,5 +1,6 @@
 import domQuery from '../utils/domQuery.js';
 import { downloadFileRequest } from '../utils/api.js';
+import { fixHtmlParserBug } from '../utils/util.js';
 
 /**
  * 获取节点列表
@@ -11,6 +12,7 @@ function getPostContent(id) {
     method: 'GET'
   }).then((res) => {
     if (res.statusCode === 200) {
+      res.data = fixHtmlParserBug(res.data);
       const $ = domQuery(res.data);
       const container = $('.content .box')[0];
       const content$ = domQuery(container.htmlStr);
@@ -21,7 +23,7 @@ function getPostContent(id) {
       postContent.createTime = tempContent[1];
       postContent.clickTimes = tempContent[2];
       const mkcontent = content$('.topic_content .markdown_body')[0];
-      postContent.content = mkcontent ? mkcontent.htmlStr : '';
+      postContent.content = mkcontent ? mkcontent.htmlStr.replace(/\<img\s*/g, '<img style="max-width: 100%;" ') : '';
       let other$ = domQuery($('.content .box')[1].htmlStr);
       const replyInfoReg = /^(\d+)\s*回复.*直到\s*(.+)$/g;
       if (other$('.cell .gray').length > 0) {
@@ -48,6 +50,7 @@ function getPostRepliesByPage(id, page) {
         method: 'GET'
     }).then((res) => {
         if (res.statusCode === 200) {
+          res.data = fixHtmlParserBug(res.data);
           const $ = domQuery(res.data);
           const reply$ = domQuery($('.content .box')[1].htmlStr);
           postReplies = reply$('.cell').slice(1).concat([reply$('.inner')[0]]).map(cell => {
@@ -56,7 +59,7 @@ function getPostRepliesByPage(id, page) {
             const floorNum = cell$('.no')[0].val;
             const name = cell$('a.dark')[0].val;
             const replyInfoReg = /^(.+)\s*via\s*(.+)$/g;
-            const replyContent = cell$('.fade')[0].val;
+            const replyContent = cell$('.fade')[0].val.replace(/\<img\s*/g, '<img style="max-width: 100%;" ');
             let time = '';
             let device = '';
             if (replyContent.indexOf('via') >= 0) {

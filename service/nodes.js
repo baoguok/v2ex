@@ -1,5 +1,6 @@
 import domQuery from '../utils/domQuery.js';
 import { downloadFileRequest } from '../utils/api.js';
+import { fixHtmlParserBug } from '../utils/util.js';
 
 /**
  * 获取节点列表
@@ -11,8 +12,10 @@ function getNodeList() {
     method: 'GET'
   }).then((res) => {
     if (res.statusCode === 200) {
+      res.data = fixHtmlParserBug(res.data);
       const $ = domQuery(res.data);
-      const container = $('.content .box')[1];
+      const container = $('.content .box')[2];
+      console.log(res.data);
       const nodes$ = domQuery(container.htmlStr);
       nodeList = nodes$('.cell').map((item, index) => {
         const item$ = domQuery(item.htmlStr);
