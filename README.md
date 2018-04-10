@@ -2,7 +2,7 @@
 v2ex 非官方小程序，欢迎大家使用、反馈和 star(<_<) 。
 
 ## 小程序码
-![](https://imgur.com/a/tZt0x)
+![](https://a.photo/images/2018/04/10/1055DAF7-A7B0-4B87-97A6-3BD76D1050B0.jpg)
 
 ## 特点
 * 未使用官方 API
