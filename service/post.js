@@ -69,7 +69,7 @@ function getPostRepliesByPage(id, page) {
             } else {
               time = replyContent;
             }
-            const content = cell$('.reply_content')[0].htmlStr;
+            const content = cell$('.reply_content')[0].htmlStr.replace(/\<img\s*/g, '<img style="max-width: 100%;" ');
             return {
                 avatar,
                 floorNum,

@@ -41,10 +41,6 @@
   font-size: 36rpx;
 }
 
-.content .rich-content-container img {
-  max-width: 100%;
-}
-
 .reply-list {
   width: 100%;
   box-sizing: border-box;
