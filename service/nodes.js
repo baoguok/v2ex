@@ -15,7 +15,6 @@ function getNodeList() {
       res.data = fixHtmlParserBug(res.data);
       const $ = domQuery(res.data);
       const container = $('.content .box')[2];
-      console.log(res.data);
       const nodes$ = domQuery(container.htmlStr);
       nodeList = nodes$('.cell').map((item, index) => {
         const item$ = domQuery(item.htmlStr);
@@ -33,7 +32,6 @@ function getNodeList() {
         }
       });
     }
-    console.log(nodeList)
     return Promise.resolve(nodeList);
   }).catch(err => {
     return Promise.reject(err);

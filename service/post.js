@@ -22,7 +22,7 @@ function getPostContent(id) {
       var tempContent = /at\s*(.+)\,\s*(\d+)\s*次点击/g.exec(content$('.header small.gray')[0].val);
       postContent.createTime = tempContent[1];
       postContent.clickTimes = tempContent[2];
-      const mkcontent = content$('.topic_content .markdown_body')[0];
+      const mkcontent = content$('.topic_content')[0];
       postContent.content = mkcontent ? mkcontent.htmlStr.replace(/\<img\s*/g, '<img style="max-width: 100%;" ') : '';
       let other$ = domQuery($('.content .box')[1].htmlStr);
       const replyInfoReg = /^(\d+)\s*回复.*直到\s*(.+)$/g;

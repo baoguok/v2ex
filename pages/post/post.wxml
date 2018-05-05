@@ -21,6 +21,7 @@
     <block
       wx:for="{{replies}}"
       wx:for-item="replyItem"
+      wx:key="replyItem.time"
     >
       <view class='reply'>
         <view class="left clearfix">

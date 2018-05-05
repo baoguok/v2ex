@@ -15,7 +15,6 @@ function getNodePost(node, page) {
       postList = $1('.box .cell').map(item => {
         let $ = domQuery(item.htmlStr);
         const tempObj = $('td@width:auto a');
-        console.log(tempObj);
         const title = tempObj[0].val;
         const id = tempObj[0].attr.href;
         const avatar = 'https:'+$('.avatar')[0].attr.src;
